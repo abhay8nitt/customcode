@@ -21,7 +21,7 @@ class DeleteOddEven extends Thread{
             lock.lock();
             boolean delete = false;
             if (list.size() > 0) {
-                boolean odd = list.get(list.size()-1) % 2 ==0;
+                boolean odd = list.get(list.size()-1) % 2 !=0;
                 if (oddThread) {
                     if (odd) delete = true;
                 } else if (!odd) delete = true;

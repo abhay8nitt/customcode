@@ -13,7 +13,7 @@ public class DeleteOddEvenImpl {
         List<Integer> list = new ArrayList<>(Arrays.asList(1,1,1,1,2,3,4,5,6,7,8,9,9,9,9));
         Lock lock = new ReentrantLock();
         ExecutorService service = Executors.newFixedThreadPool(2);
-        service.submit(new DeleteOddEven("Odd",  list, false, lock));
-        service.submit(new DeleteOddEven("Even", list, true,  lock));
+        service.submit(new DeleteOddEven("Odd",  list, true, lock));
+        service.submit(new DeleteOddEven("Even", list, false,  lock));
     }
 }
