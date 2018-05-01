@@ -1,5 +1,8 @@
 package multithreading.custom.producerconsumer;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 public class ProducerConsumerTest {
     public static void main(String[] args) throws InterruptedException {
         DataStore store = new DataStore(20);
@@ -9,6 +12,30 @@ public class ProducerConsumerTest {
         consumer.start();
         producer.join();
         consumer.join();
+
+        ExecutorService execService = Executors.newFixedThreadPool(5);
+        ProducerConsumerV2 service = new ProducerConsumerV2();
+        execService.submit(()-> {
+            try {
+                service.consume();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        execService.submit(()-> {
+            try {
+                service.consume();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        execService.submit(()-> {
+            try {
+                service.produce();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
     }
 }
 
