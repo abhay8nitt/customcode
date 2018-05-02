@@ -118,6 +118,18 @@ class ArrayList<T> implements Serializable, Cloneable{
         return index;
     }
 
+    public T remove(int index){
+        if(index > size){
+            throw new IllegalArgumentException("Illegal access at index "+ index);
+        }
+        T e = (T) elements[index];
+        if(index < size){
+            System.arraycopy(elements, index + 1, elements, index, size -index -1);
+        }
+        elements[--size] = null;
+        return e;
+    }
+
     private void writeObject(java.io.ObjectOutputStream s) throws IOException {
         s.defaultWriteObject();
         s.writeInt(size);
