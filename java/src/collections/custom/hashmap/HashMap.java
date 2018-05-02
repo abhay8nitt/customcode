@@ -15,14 +15,14 @@ public class HashMap<K,V> {
         }
     }
     private Entry<K,V>[] table;
-    private static final int INITIAL_CAPACITY = 1 << 2;
+    private static final int INITIAL_CAPACITY = 1 << 4;
     private int capacity;
     private static final float DEFAULT_LOAD_FACTOR = 0.75f;
 
     public HashMap() {
         this.loadFactor = DEFAULT_LOAD_FACTOR;
         table = new Entry[INITIAL_CAPACITY];
-        this.capacity = 4;
+        this.capacity = 16;
     }
 
     public void put(K key, V value){
@@ -94,7 +94,7 @@ public class HashMap<K,V> {
     }
 
     public void printAll(){
-        for(int i=0;i<capacity;i++){
+        for(int i=0;i < capacity;i++){
             if(table[i] != null){
                 Entry<K, V> entry = table[i];
                 while(entry != null){
@@ -105,7 +105,16 @@ public class HashMap<K,V> {
         }
     }
 
-    private int hash(K key){
+    public boolean containsKey(Object obj) {
+      boolean contains = false;
+      if(table != null && obj != null){
+          int hash = hash(obj);
+          contains = table[hash] != null;
+      }
+      return contains;
+    }
+
+    private int hash(Object key){
         return Math.abs(key.hashCode()) % capacity;
     }
 }
