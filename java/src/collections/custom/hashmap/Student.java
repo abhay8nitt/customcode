@@ -56,11 +56,11 @@ class Student {
 
     @Override
     public String toString() {
-        return "Student{" +
+        return "Student(" +
                 "name='" + name + '\'' +
                 ", rollNumber=" + rollNumber +
                 ", grade='" + grade + '\'' +
                 ", hosteler=" + hosteler +
-                '}';
+                ')';
     }
 }

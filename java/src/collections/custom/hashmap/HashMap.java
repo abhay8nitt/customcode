@@ -93,6 +93,18 @@ public class HashMap<K,V> {
         return false;
     }
 
+    public void printAll(){
+        for(int i=0;i<capacity;i++){
+            if(table[i] != null){
+                Entry<K, V> entry = table[i];
+                while(entry != null){
+                    System.out.println("["+entry.key+"="+entry.value+"]" +"   ");
+                    entry=entry.next;
+                }
+            }
+        }
+    }
+
     private int hash(K key){
         return Math.abs(key.hashCode()) % capacity;
     }
