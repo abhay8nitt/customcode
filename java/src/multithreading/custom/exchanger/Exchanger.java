@@ -38,18 +38,24 @@ class Exchanger<U> {
 
         try{
             lock.lock();
+            System.out.println(Thread.currentThread().getName() +" in exchange mode");
             if(!THREAD_ONE_WAS_SET){
+                System.out.println(Thread.currentThread().getName() +" setting object one");
                 ONE = obj;
                 THREAD_ONE_WAS_SET = true;
+                System.out.println(Thread.currentThread().getName() +" waiting for thread two to set");
                 do {
                     condition.await();
                 }while (!THREAD_TWO_WAS_SET);
             }else{
+                System.out.println(Thread.currentThread().getName() +" setting second object");
                 setONE = false;
                 TWO = obj;
                 THREAD_TWO_WAS_SET = true;
+                System.out.println(Thread.currentThread().getName() +" signalled thread one");
                 condition.signal();
             }
+            System.out.println(Thread.currentThread().getName() +" ready to return value "+ (setONE ? TWO : ONE));
             return setONE ? TWO : ONE;
         }finally {
             if(!setONE){

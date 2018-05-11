@@ -3,6 +3,12 @@ package multithreading.custom.exchanger;
 public class ExchangerImpl {
     public static void main(String[] args) {
         stringExchanger();
+        try {
+            Thread.sleep(1000);
+            System.out.println();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         integerExchanger();
     }
 
